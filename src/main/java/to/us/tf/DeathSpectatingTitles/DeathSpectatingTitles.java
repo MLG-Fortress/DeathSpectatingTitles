@@ -99,7 +99,7 @@ public class DeathSpectatingTitles extends JavaPlugin implements Listener
                 String subTitle = formatter(unformattedSubTitle, seconds, score);
                 spectateTask.getPlayer().sendTitle(title, subTitle, 0, 20, 2); //Could use paper's more robust Title API
             }
-        }.runTaskTimer(this, 2L, 5L);
+        }.runTaskTimer(this, 2L, 10L);
     }
 
     @EventHandler
