@@ -5,6 +5,8 @@ Requires [DeathSpectating](https://github.com/MLG-Fortress/DeathSpectating) to b
 
 [Downloads](https://github.com/MLG-Fortress/DeathSpectatingTitles/releases)
 
+[![DeathSpectatingTitles emonstration video](http://img.youtube.com/vi/cFgPumDLi1c/0.jpg)](https://www.youtube.com/watch?v=cFgPumDLi1c)
+
 Default config:
 ```yml
 titles:
