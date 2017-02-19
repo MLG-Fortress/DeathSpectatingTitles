@@ -1,0 +1,6 @@
+name: DeathSpectatingTitles
+author: RoboMWM
+version: ${project.version}
+main: to.us.tf.DeathSpectatingTitles.DeathSpectatingTitles
+website: https://github.com/MLG-Fortress/DeathSpectating/
+depend: [DeathSpectating]
