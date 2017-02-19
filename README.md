@@ -3,6 +3,8 @@ Addon for DeathSpectating - displays configurable title messages to death specta
 
 Requires [DeathSpectating](https://github.com/MLG-Fortress/DeathSpectating) to be installed.
 
+[Downloads](https://github.com/MLG-Fortress/DeathSpectatingTitles/releases)
+
 Default config:
 ```yml
 titles:
