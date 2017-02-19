@@ -30,7 +30,7 @@ public class DeathSpectatingTitles extends JavaPlugin implements Listener
 {
     private FileConfiguration config = getConfig();
     private List<String> deathTitles = new ArrayList<>(Arrays.asList("You died!", "Game over!"));
-    private List<String> deathSubTitles = new ArrayList<>(Arrays.asList("Respawning in {0}", "Score: {1}", "Score: {1}, Respawning in {0}"));
+    private List<String> deathSubTitles = new ArrayList<>(Arrays.asList("Respawning in {0}", "Score: &e{1}", "Score: &e{1}&f, Respawning in {0}"));
     private Map<Player, Integer> scores = new HashMap<>();
 
     public void onEnable()
