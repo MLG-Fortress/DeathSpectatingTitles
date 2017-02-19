@@ -8,6 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import to.us.tf.DeathSpectating.events.DeathSpectatingEvent;
@@ -88,10 +89,9 @@ public class DeathSpectatingTitles extends JavaPlugin implements Listener
             @Override
             public void run()
             {
-                if (spectateTask.getTicks() < 2)
+                if (spectateTask.getTicks() < 2 || !spectateTask.getPlayer().hasMetadata("DEAD"))
                 {
                     this.cancel();
-                    spectateTask.getPlayer().resetTitle();
                     return;
                 }
                 int seconds = (int)spectateTask.getTicks() / 20;
@@ -100,5 +100,11 @@ public class DeathSpectatingTitles extends JavaPlugin implements Listener
                 spectateTask.getPlayer().sendTitle(title, subTitle, 0, 20, 2); //Could use paper's more robust Title API
             }
         }.runTaskTimer(this, 2L, 5L);
+    }
+
+    @EventHandler
+    void onRespawn(PlayerRespawnEvent event)
+    {
+        event.getPlayer().getPlayer().resetTitle();
     }
 }
