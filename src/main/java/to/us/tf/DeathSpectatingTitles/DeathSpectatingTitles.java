@@ -89,7 +89,10 @@ public class DeathSpectatingTitles extends JavaPlugin implements Listener
             public void run()
             {
                 if (spectateTask.getTicks() < 2)
+                {
                     this.cancel();
+                    spectateTask.getPlayer().resetTitle();
+                }
                 int seconds = (int)spectateTask.getTicks() / 20;
                 String title = formatter(unformattedTitle, seconds, score);
                 String subTitle = formatter(unformattedSubTitle, seconds, score);
