@@ -2,8 +2,12 @@ package to.us.tf.DeathSpectatingTitles;
 
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import to.us.tf.DeathSpectating.events.DeathSpectatingEvent;
@@ -12,7 +16,9 @@ import to.us.tf.DeathSpectating.tasks.SpectateTask;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -25,6 +31,7 @@ public class DeathSpectatingTitles extends JavaPlugin implements Listener
     private FileConfiguration config = getConfig();
     private List<String> deathTitles = new ArrayList<>(Arrays.asList("You died!", "Game over!"));
     private List<String> deathSubTitles = new ArrayList<>(Arrays.asList("Respawning in {0}", "Score: {1}", "Score: {1}, Respawning in {0}"));
+    private Map<Player, Integer> scores = new HashMap<>();
 
     public void onEnable()
     {
@@ -55,6 +62,19 @@ public class DeathSpectatingTitles extends JavaPlugin implements Listener
         return list.get(ThreadLocalRandom.current().nextInt(list.size()));
     }
 
+    @EventHandler(priority = EventPriority.LOWEST)
+    void onDeathStoreScore(PlayerDeathEvent event)
+    {
+        scores.put(event.getEntity(), event.getEntity().getTotalExperience());
+    }
+
+    @EventHandler(priority = EventPriority.HIGHEST)
+    void onQuitEvent(PlayerQuitEvent event)
+    {
+        //Cleanup just in case
+        scores.remove(event.getPlayer());
+    }
+
     @EventHandler
     void onSpectate(DeathSpectatingEvent event)
     {
@@ -63,7 +83,7 @@ public class DeathSpectatingTitles extends JavaPlugin implements Listener
             SpectateTask spectateTask = event.getSpectateTask();
             String unformattedTitle = getRandomString(deathTitles);
             String unformattedSubTitle = getRandomString(deathSubTitles);
-            int score = spectateTask.getPlayer().getTotalExperience();
+            int score = scores.remove(spectateTask.getPlayer());
 
             @Override
             public void run()
