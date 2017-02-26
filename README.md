@@ -1,4 +1,9 @@
-# DeathSpectatingTitles
+# Notice
+This addon has been folded into the main plugin, and thus will not be updated/published. You are still welcome to fork and make a more robust version of this addon/feature.
+
+
+
+## DeathSpectatingTitles
 Addon for DeathSpectating - displays configurable title messages to death spectating player
 
 Requires [DeathSpectating](https://github.com/MLG-Fortress/DeathSpectating) to be installed.
